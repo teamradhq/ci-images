@@ -8,8 +8,6 @@ RUN apk update --no-cache && apk upgrade --no-cache \
     && install-php-extensions bcmath intl pcov pdo_mysql soap xml \
     && rm -rf /var/cache/apk/*
 
-RUN echo "extension=pcov.so" >> /usr/local/etc/php/php.ini
-
-RUN echo "pcov.enabled=1" >> /usr/local/etc/php/php.ini
+RUN echo "pcov.enabled=1" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini
 
 COPY --from=composer:2.8.9 /usr/bin/composer /usr/local/bin/composer
