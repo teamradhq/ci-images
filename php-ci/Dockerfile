@@ -1,11 +1,31 @@
 ARG PHP_VERSION=8.2
 
+ARG XDEBUG_VERSION=3.4.3
+
 FROM php:${PHP_VERSION}-cli-alpine
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-RUN apk update --no-cache && apk upgrade --no-cache \
-    && install-php-extensions bcmath intl pcov pdo_mysql soap xml \
+RUN apk update --no-cache \
+  && apk upgrade --no-cache \
+    && install-php-extensions \
+        bcmath \
+        gd \
+        imagick \
+        imap \
+        intl \
+        mongodb \
+        mysqli \
+        opcache \
+        pcntl \
+        pcov \
+        pdo_mysql \
+        redis \
+        soap \
+        xhprof \
+        xdebug-$XDEBUG_VERSION \
+        xml \
+        zip \
     && rm -rf /var/cache/apk/*
 
 RUN echo "pcov.enabled=1" >> /usr/local/etc/php/conf.d/docker-php-ext-pcov.ini
