@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [7.4, 8.2, 8.3, 8.4]
-        platform: [ linux/amd64 ]
+        php-version: [8.5, 8.4, 8.3, 8.2, 7.4]
 
     steps:
       - name: Checkout repository
@@ -34,7 +33,7 @@ jobs:
         with:
           context: ./php-ci
           push: true
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64
           build-args: |
             PHP_VERSION=${{ matrix.php-version }}
           tags: |
