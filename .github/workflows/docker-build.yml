@@ -28,18 +28,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Build Codeception and push
-        if: matrix.php-version == '8.2'
-        uses: docker/build-push-action@v6
-        with:
-          context: ./codecept-ci
-          push: true
-          platforms: linux/amd64,linux/arm64
-            ghcr.io/${{ github.repository_owner }}/codecept-ci:8.2
-          labels: |
-            org.opencontainers.image.source=https://github.com/${{ github.repository }}
-            org.opencontainers.image.licenses=MIT
-
       - name: Build CI and push
         uses: docker/build-push-action@v6
         with:
@@ -50,6 +38,18 @@ jobs:
             PHP_VERSION=${{ matrix.php-version }}
           tags: |
             ghcr.io/${{ github.repository_owner }}/php-ci:${{ matrix.php-version }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.licenses=MIT
+
+      - name: Build Codeception and push
+        if: matrix.php-version == '8.2'
+        uses: docker/build-push-action@v6
+        with:
+          context: ./codecept-ci
+          push: true
+          platforms: linux/amd64,linux/arm64
+            ghcr.io/${{ github.repository_owner }}/codecept-ci:8.2
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.licenses=MIT
