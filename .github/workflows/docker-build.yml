@@ -43,6 +43,7 @@ jobs:
             org.opencontainers.image.licenses=MIT
 
       - name: Build Codeception and push
+        if: matrix.php-version == '8.2'
         uses: docker/build-push-action@v6
         with:
           context: ./codecept-ci
