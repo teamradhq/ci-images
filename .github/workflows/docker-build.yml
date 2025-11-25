@@ -33,7 +33,7 @@ jobs:
         with:
           context: ./php-ci
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           build-args: |
             PHP_VERSION=${{ matrix.php-version }}
           tags: |
@@ -48,7 +48,7 @@ jobs:
         with:
           context: ./codecept-ci
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
             ghcr.io/${{ github.repository_owner }}/codecept-ci:8.2
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
