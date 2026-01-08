@@ -59,7 +59,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tool: [phpstan, phpcs, pint, rector]
+        include:
+          - tool: phpstan
+            package: "phpstan/phpstan"
+          - tool: rector
+            package: "rector/rector driftingly/rector-laravel"
+          - tool: pint
+            package: "laravel/pint"
+          - tool: phpcs
+            package: "squizlabs/php_codesniffer"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -77,9 +85,11 @@ jobs:
       - name: Build Tool and push
         uses: docker/build-push-action@v6
         with:
-          context: ./${{ matrix.tool }}
+          context: ./php-tool
           push: true
           platforms: linux/amd64
+          build-args: |
+            COMPOSER_PACKAGE=${{ matrix.package }}
           tags: |
             ghcr.io/${{ github.repository_owner }}/${{ matrix.tool }}:8.4
           labels: |
