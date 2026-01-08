@@ -64,7 +64,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - tool: phpstan
+          - tool: stan
             package: "phpstan/phpstan"
           - tool: rector
             package: "rector/rector driftingly/rector-laravel"
