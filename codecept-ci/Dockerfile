@@ -2,7 +2,7 @@ FROM michaelcooper/pulse:gitlab-runner-app-php82
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-COPY --from=composer:2.9.2 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.9.3 /usr/bin/composer /usr/local/bin/composer
 
 RUN apt-get update \
     && apt-get upgrade -y \

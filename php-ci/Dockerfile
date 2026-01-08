@@ -4,7 +4,7 @@ FROM php:${PHP_VERSION}-cli-alpine
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-COPY --from=composer:2.9.2 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.9.3 /usr/bin/composer /usr/local/bin/composer
 
 RUN apk update --no-cache && apk upgrade --no-cache \
     && apk add aws-cli docker git jq nodejs npm \
