@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tool: [phpstan, rector, pint]
+        tool: [phpstan, phpcs, pint, rector]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
