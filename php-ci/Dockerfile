@@ -10,10 +10,17 @@ RUN apk update --no-cache && apk upgrade --no-cache \
     && apk add aws-cli docker git jq nodejs npm \
     && install-php-extensions \
         bcmath \
+        curl \
+        dom\
         gd \
         intl \
+        libxml \
+        mbstring \
+        pcntl \
         pcov \
+        pdo \
         pdo_mysql \
+        pdo_sqlite \
         soap \
         xml  \
         zip \
