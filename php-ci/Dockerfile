@@ -7,7 +7,7 @@ COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr
 COPY --from=composer:2.9.3 /usr/bin/composer /usr/local/bin/composer
 
 RUN apk update --no-cache && apk upgrade --no-cache \
-    && apk add aws-cli docker git jq nodejs npm \
+    && apk add aws-cli bash docker git jq nodejs npm \
     && install-php-extensions \
         bcmath \
         curl \
