@@ -16,7 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [8.5, 8.4, 8.3, 8.2, 7.4]
+        php-version: [8.4, 8.3, 8.2]
+        alpine-version: [alpine3.20]
+        include:
+          - php-version: "8.5"
+            alpine-version: alpine3.22
+          - php-version: "7.4"
+            alpine-version: alpine3.16
 
     steps:
       - name: Checkout repository
@@ -40,6 +46,7 @@ jobs:
           platforms: linux/amd64
           build-args: |
             PHP_VERSION=${{ matrix.php-version }}
+            ALPINE_VERSION=${{ matrix.alpine-version }}
           tags: |
             ghcr.io/${{ github.repository_owner }}/php-ci:${{ matrix.php-version }}
           labels: |

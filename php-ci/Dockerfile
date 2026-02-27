@@ -1,6 +1,8 @@
 ARG PHP_VERSION=8.2
 
-FROM php:${PHP_VERSION}-cli-alpine
+ARG ALPINE_VERSION=alpine3.20
+
+FROM php:${PHP_VERSION}-cli-${ALPINE_VERSION}
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
