@@ -7,7 +7,6 @@ on:
     branches: [ main ]
   schedule:
     - cron: '0 0 * * 0'
-    #- cron: '0 * * * *'
   workflow_dispatch:  # Allows manual triggering
 
 concurrency:
@@ -19,13 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [8.4, 8.3, 8.2]
-        alpine-version: [alpine3.20]
-        include:
-          - php-version: "8.5"
-            alpine-version: alpine3.22
-          - php-version: "7.4"
-            alpine-version: alpine3.16
+        php-version: [8.5, 8.4, 8.3, 8.2]
+        alpine-version: [alpine3.22]
 
     steps:
       - name: Checkout repository
@@ -49,22 +43,9 @@ jobs:
           platforms: linux/amd64
           build-args: |
             PHP_VERSION=${{ matrix.php-version }}
-            ALPINE_VERSION=${{ matrix.alpine-version }}
+            ALPINE_VERSION=alpine3.22
           tags: |
             ghcr.io/${{ github.repository_owner }}/php-ci:${{ matrix.php-version }}
-          labels: |
-            org.opencontainers.image.source=https://github.com/${{ github.repository }}
-            org.opencontainers.image.licenses=MIT
-
-      - name: Build Codeception and push
-        if: matrix.php-version == '8.2'
-        uses: docker/build-push-action@v6
-        with:
-          context: ./codecept-ci
-          push: true
-          platforms: linux/amd64
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/codecept-ci:8.2
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.licenses=MIT
