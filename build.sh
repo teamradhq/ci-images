@@ -8,7 +8,13 @@ then
 fi
 
 CONTEXT=$1
-VERSIONS=(8.5 8.4 8.3 8.2 7.4)
+
+if [ -z "$2" ]; then
+    VERSIONS=(8.5 8.4 8.3 8.2 7.4)
+else
+    VERSIONS=("${@:2}")
+fi
+
 
 for version in "${VERSIONS[@]}"; do
     tag="${CONTEXT}:$version"
