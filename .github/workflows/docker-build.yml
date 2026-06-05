@@ -55,14 +55,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - tool: stan
-            package: "phpstan/phpstan"
-          - tool: rector
-            package: "rector/rector driftingly/rector-laravel"
-          - tool: pint
-            package: "laravel/pint"
+          - tool: ide-helper
+            package: "barryvdh/laravel-ide-helper"
           - tool: phpcs
             package: "squizlabs/php_codesniffer"
+          - tool: pint
+            package: "laravel/pint"
+          - tool: rector
+            package: "rector/rector driftingly/rector-laravel"
+          - tool: stan
+            package: "phpstan/phpstan"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
